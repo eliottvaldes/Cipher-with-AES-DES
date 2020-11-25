@@ -1,0 +1,79 @@
+
+<html>
+<head>
+    <title>Cifrado con Aes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" ></script>    
+    <script type="text/javascript" src="cifrado.js" ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+    <div id="container">
+        <div class=" mx-5 my-5">
+            <h1 class="animate__animated animate__bounce  text-center">CIFRADO AES</h1>
+            <br><hr class="hr"><br>
+            <form class="animate__animated animate__backInRight animate__delay-2s">
+            <span>
+             <h3>Añade tu archivo a cifrar</h3>
+            </span>
+            <input type="file" id="file-input" accept=".docx,.txt"  width="250px" height="750px"/>                    
+            <span id="contenido-archivo" hidden></span>
+            <input id="archivoc" type="text" hidden>
+            <br><br>            
+                <h3>Clave de cifrado</h3>                
+                <input type="text" id="clave" name="clave" minlength="8" maxlength="32" required>
+                <br><br><br><br>
+                <div class="clearfix">
+                    <div class="float-left">
+                        <input class="btn btn-primary" type="button" onclick="valcla1();" id="bci" value="Cifrar archivo" >                        
+                    </div>
+                    <div class="float-left ml-5">
+                        <input class="btn btn-primary" type="button" id="bdes" onclick="valcla2();" value="Descifrar archivo">
+                        <br>
+                    </div>                    
+                </div>
+                <br><hr>
+            </form>
+            <div hidden>
+                <input id="ci" type="text" readonly>
+                <input id="des" type="text" readonly>
+                <textarea id="cci" readonly></textarea>    
+                <textarea id="cdes" readonly></textarea>                    
+            </div>
+            <div id="pshw"></div>
+        </div>
+    </div>
+    <script>
+        function leerArchivo(e) {
+        var archivo = e.target.files[0];
+        if (!archivo) {
+            return;
+        }
+        var lector = new FileReader();
+        lector.onload = function(e) {
+            var contenido = e.target.result;
+            mostrarContenido(contenido);
+        };
+        lector.readAsText(archivo);
+        }
+
+        function mostrarContenido(contenido) {
+        var elemento = document.getElementById('contenido-archivo');
+        elemento.innerHTML = contenido;  
+        document.getElementById('archivoc').value = contenido;
+        }
+        document.getElementById('file-input').addEventListener('change', leerArchivo, false);
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
